@@ -12,8 +12,7 @@ public static class DbInitializer
         {
             Directory.CreateDirectory("../database");
         }
-        // context.Database.Migrate();
-        context.Database.EnsureCreated();
+        context.Database.Migrate();
 
         if (!context.Users.Any())
         {
