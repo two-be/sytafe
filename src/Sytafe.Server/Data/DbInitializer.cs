@@ -8,10 +8,6 @@ public static class DbInitializer
 {
     public static void Initialize(AppDbContext context)
     {
-        if (!Directory.Exists("../database"))
-        {
-            Directory.CreateDirectory("../database");
-        }
         context.Database.Migrate();
 
         if (!context.Users.Any())

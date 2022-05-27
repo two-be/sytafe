@@ -13,10 +13,10 @@ namespace Sytafe.Server.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "TEXT", nullable: false),
-                    Password = table.Column<string>(type: "TEXT", nullable: true),
-                    Type = table.Column<string>(type: "TEXT", nullable: true),
-                    Username = table.Column<string>(type: "TEXT", nullable: true)
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Type = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Username = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -27,13 +27,13 @@ namespace Sytafe.Server.Migrations
                 name: "ScreenTimes",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "TEXT", nullable: false),
-                    Anytime = table.Column<bool>(type: "INTEGER", nullable: false),
-                    AvailableFrom = table.Column<TimeSpan>(type: "TEXT", nullable: false),
-                    AvailableTo = table.Column<TimeSpan>(type: "TEXT", nullable: false),
-                    DayOfWeek = table.Column<string>(type: "TEXT", nullable: true),
-                    MinuteLimit = table.Column<int>(type: "INTEGER", nullable: false),
-                    UserId = table.Column<string>(type: "TEXT", nullable: true)
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Anytime = table.Column<bool>(type: "bit", nullable: false),
+                    AvailableFrom = table.Column<TimeSpan>(type: "time", nullable: false),
+                    AvailableTo = table.Column<TimeSpan>(type: "time", nullable: false),
+                    DayOfWeek = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MinuteLimit = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -49,11 +49,11 @@ namespace Sytafe.Server.Migrations
                 name: "Useds",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "TEXT", nullable: false),
-                    From = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    DayOfWeek = table.Column<string>(type: "TEXT", nullable: true),
-                    To = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    UserId = table.Column<string>(type: "TEXT", nullable: true)
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    From = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DayOfWeek = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    To = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
