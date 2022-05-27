@@ -15,6 +15,8 @@ public class UserInfo : Abstract
     public List<UsedInfo> Useds { get; set; } = new List<UsedInfo>();
 
     [NotMapped]
+    public bool IsAdministrator => Type == "administrator";
+    [NotMapped]
     public int MinuteLeft
     {
         get

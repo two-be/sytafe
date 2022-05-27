@@ -29,6 +29,10 @@ namespace Sytafe
 
             if (SignIn())
             {
+                if (_user.IsAdministrator)
+                {
+                    return;
+                }
                 _service._token = _user.Token;
                 Connect();
 
@@ -79,7 +83,7 @@ namespace Sytafe
         {
             try
             {
-                if (_user.Type != "administrator")
+                if (!_user.IsAdministrator)
                 {
                     e.Cancel = true;
                 }
@@ -92,9 +96,10 @@ namespace Sytafe
 
         private void secondTimer_Tick(object sender, EventArgs e)
         {
-            if (_user.Type == "administrator")
+            if (_user.IsAdministrator)
             {
                 secondTimer.Enabled = false;
+                return;
             }
             var process = Process.GetProcessesByName("Taskmgr").FirstOrDefault();
             if (process is not null)
