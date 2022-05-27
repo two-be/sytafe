@@ -65,6 +65,8 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapHub<AppHub>("/Hub");
+app.UseDefaultFiles();
+app.UseStaticFiles();
 
 app.MapControllers();
 
