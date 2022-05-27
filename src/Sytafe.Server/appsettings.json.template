@@ -1,0 +1,17 @@
+{
+  "AllowedHosts": "*",
+  "ConnectionStrings": {
+    "DefaultConnection": "Data Source=../database/app.db"
+  },
+  "Jwt": {
+    "Audience": "audience",
+    "Issuer": "issuer",
+    "Key": "key"
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  }
+}

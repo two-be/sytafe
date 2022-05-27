@@ -1,0 +1,7 @@
+<p-blockUI [blocked]="processing">
+    <p-progressSpinner></p-progressSpinner>
+</p-blockUI>
+<div class="animate__animated animate__fadeIn container">
+    <p-card styleClass="mb-3 no-content" [header]="user.username" [subheader]="user.type"></p-card>
+    <screen-time *ngIf="user.id" [userId]="user.id"></screen-time>
+</div>

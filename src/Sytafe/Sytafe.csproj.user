@@ -4,5 +4,8 @@
     <Compile Update="AppForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Forms\SignInForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

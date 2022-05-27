@@ -1,0 +1,70 @@
+#nullable disable
+
+using System.ComponentModel.DataAnnotations.Schema;
+using Sytafe.Library.Extensions;
+
+namespace Sytafe.Library.Models;
+
+public class UserInfo : Abstract
+{
+    public string Password { get; set; } = string.Empty;
+    public string Type { get; set; } = string.Empty;
+    public string Username { get; set; } = string.Empty;
+
+    public List<ScreenTimeInfo> ScreenTimes { get; set; } = new List<ScreenTimeInfo>();
+    public List<UsedInfo> Useds { get; set; } = new List<UsedInfo>();
+
+    [NotMapped]
+    public int MinuteLeft
+    {
+        get
+        {
+            if (TodayScreenTime is not null && TodayUseds.Any())
+            {
+                var minuteLeft = TodayScreenTime.MinuteLimit;
+                var usedMinute = TodayUseds.Sum(x => (x.To - x.From).TotalMinutes.ToInt32());
+                if (usedMinute > 0)
+                {
+                    minuteLeft = minuteLeft - usedMinute;
+                }
+                return minuteLeft;
+            }
+            return TodayScreenTime?.MinuteLimit ?? 2;
+        }
+    }
+    [NotMapped]
+    public ScreenTimeInfo TodayScreenTime => ScreenTimes.FirstOrDefault(x => x.DayOfWeek == DateTimeOffset.Now.DayOfWeek.ToString());
+    [NotMapped]
+    public List<UsedInfo> TodayUseds => Useds.Where(x => x.From.Date == DateTimeOffset.Now.Date).ToList();
+    [NotMapped]
+    public string Token { get; set; } = string.Empty;
+
+    public UserInfo ToInfo()
+    {
+        Password = string.Empty;
+        ScreenTimes = (ScreenTimes ?? new List<ScreenTimeInfo>()).Select(x =>
+        {
+            x.User = null;
+            return x;
+        }).ToList();
+        Useds = (Useds ?? new List<UsedInfo>()).Select(x =>
+        {
+            x.User = null;
+            return x;
+        }).ToList();
+        return this;
+    }
+
+    public string Validate()
+    {
+        if (string.IsNullOrEmpty(Username))
+        {
+            return "Please enter a valid Username.";
+        }
+        if (string.IsNullOrEmpty(Password))
+        {
+            return "Please enter a valid Password.";
+        }
+        return string.Empty;
+    }
+}
