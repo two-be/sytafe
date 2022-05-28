@@ -44,9 +44,10 @@ public class UsedController : ControllerBase
     {
         try
         {
+            var now = DateTime.Now;
             var used = new UsedInfo
             {
-                DayOfWeek = value.DayOfWeek,
+                DayOfWeek = now.DayOfWeek.ToString(),
                 From = DateTime.Now,
                 UserId = value.UserId,
             };
