@@ -12,7 +12,7 @@ namespace Sytafe.Services
 {
     public class AppService
     {
-        public string _token = string.Empty;
+        public string Token { get; set; } = string.Empty;
 
         private readonly string _serverAddress;
 
@@ -24,7 +24,7 @@ namespace Sytafe.Services
         public UsedInfo CreateUsedToday(string userId)
         {
             using var http = new HttpClient();
-            http.DefaultRequestHeaders.Add(HeaderNames.Authorization, $"Bearer {_token}");
+            http.DefaultRequestHeaders.Add(HeaderNames.Authorization, $"Bearer {Token}");
             var used = new UsedInfo
             {
                 UserId = userId,
@@ -52,7 +52,7 @@ namespace Sytafe.Services
         public UsedInfo GetUsedTodayUsing(string userId)
         {
             using var http = new HttpClient();
-            http.DefaultRequestHeaders.Add(HeaderNames.Authorization, $"Bearer {_token}");
+            http.DefaultRequestHeaders.Add(HeaderNames.Authorization, $"Bearer {Token}");
             var rs = http.GetAsync($"{_serverAddress}/used/today/using/user/{userId}").GetAwaiter().GetResult();
             var responseContent = rs.Content.ReadAsStringAsync().GetAwaiter().GetResult();
             if (!rs.IsSuccessStatusCode)
@@ -89,7 +89,7 @@ namespace Sytafe.Services
         public UsedInfo UpdateUsedToday(string id)
         {
             using var http = new HttpClient();
-            http.DefaultRequestHeaders.Add(HeaderNames.Authorization, $"Bearer {_token}");
+            http.DefaultRequestHeaders.Add(HeaderNames.Authorization, $"Bearer {Token}");
             var content = new StringContent("{}", Encoding.UTF8, MediaTypeNames.Application.Json);
             var rs = http.PutAsync($"{_serverAddress}/used/today/{id}", content).GetAwaiter().GetResult();
             var responseContent = rs.Content.ReadAsStringAsync().GetAwaiter().GetResult();

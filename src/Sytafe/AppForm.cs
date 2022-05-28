@@ -33,7 +33,7 @@ namespace Sytafe
                 {
                     return;
                 }
-                _service._token = _user.Token;
+                _service.Token = _user.Token;
                 Connect();
 
                 SetUsed();
@@ -65,11 +65,12 @@ namespace Sytafe
 
         private bool SignIn()
         {
-            var signInForm = new SignInForm(_service, _settings);
+            var signInForm = new SignInForm(_service);
             var rs = signInForm.ShowDialog();
             if (rs == DialogResult.OK)
             {
                 _user = signInForm.User;
+                _minuteLeft = _user.MinuteLeft;
                 return true;
             }
             else
@@ -110,6 +111,11 @@ namespace Sytafe
 
         private void timer_Tick(object sender, EventArgs e)
         {
+            if (_user.IsAdministrator)
+            {
+                timer.Enabled = false;
+                return;
+            }
             _minuteLeft--;
             if (_minuteLeft == 15)
             {

@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { AppService } from "src/app/app.service";
 
 import { AbstractComponent } from "src/app/components"
@@ -12,7 +12,7 @@ export class UserPage extends AbstractComponent implements OnInit {
 
     user = new UserInfo()
 
-    constructor(service: AppService, private route: ActivatedRoute) {
+    constructor(service: AppService, private route: ActivatedRoute, private router: Router) {
         super(service)
     }
 
@@ -27,6 +27,10 @@ export class UserPage extends AbstractComponent implements OnInit {
     }
 
     async ngOnInit() {
+        if (!this.userInfo.isAdministrator) {
+            this.router.navigateByUrl("/home")
+            return
+        }
         let userId = this.route.snapshot.params["id"]
         await this.initUser(userId)
     }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 import { AppService } from "src/app/app.service";
 
 import { AbstractComponent } from "src/app/components"
@@ -12,7 +13,7 @@ export class UsersPage extends AbstractComponent implements OnInit {
     user = new UserInfo()
     users: UserInfo[] = []
 
-    constructor(service: AppService) {
+    constructor(service: AppService, private router: Router) {
         super(service)
     }
 
@@ -60,6 +61,10 @@ export class UsersPage extends AbstractComponent implements OnInit {
     }
 
     async ngOnInit() {
+        if (!this.userInfo.isAdministrator) {
+            this.router.navigateByUrl("/home")
+            return
+        }
         await this.initUsers()
     }
 

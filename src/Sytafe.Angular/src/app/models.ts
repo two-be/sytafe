@@ -21,6 +21,7 @@ export class SelectOptionInfo {
 }
 
 export class UserInfo extends Abstract {
+    isAdministrator = false
     password = ""
     username = ""
     type = ""

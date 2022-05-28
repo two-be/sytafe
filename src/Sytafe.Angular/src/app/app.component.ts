@@ -1,4 +1,4 @@
-import { Component } from "@angular/core"
+import { Component, OnInit } from "@angular/core"
 import { MenuItem } from "primeng/api"
 import { AppService } from "./app.service"
 import { AbstractComponent } from "./components"
@@ -9,22 +9,31 @@ import { UserInfo } from "./models"
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.css"]
 })
-export class AppComponent extends AbstractComponent {
+export class AppComponent extends AbstractComponent implements OnInit {
 
-  items: MenuItem[] = [
-    {
-      label: "User",
-      routerLink: "/users",
-    }
-  ]
+  items: MenuItem[] = []
   user = new UserInfo()
 
   constructor(service: AppService) {
     super(service)
   }
 
+  initMenu() {
+    this.items = [
+      {
+        label: "User",
+        routerLink: "/users",
+        visible: this.userInfo.isAdministrator,
+      }
+    ]
+  }
+
   isSignedIn() {
     return this.userInfo.id
+  }
+
+  ngOnInit() {
+    this.initMenu()
   }
 
   async signIn() {
@@ -33,6 +42,7 @@ export class AppComponent extends AbstractComponent {
       let rs = await this.service.post.userForSignIn(this.user)
       this.user = rs
       this.setUserInfo(rs)
+      this.initMenu()
       this.setProcessing(false)
     } catch (err) {
       this.error(err)

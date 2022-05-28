@@ -21,14 +21,12 @@ namespace Sytafe.Forms
         public UserInfo User { get; set; }
 
         private readonly AppService _service;
-        private readonly AppSettings _settings;
 
-        public SignInForm(AppService service, AppSettings settings)
+        public SignInForm(AppService service)
         {
             InitializeComponent();
 
             _service = service;
-            _settings = settings;
         }
 
         private void signInButton_Click(object sender, EventArgs e)
