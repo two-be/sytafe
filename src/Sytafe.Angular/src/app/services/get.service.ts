@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core"
 import { firstValueFrom, Subject, takeUntil } from "rxjs"
 
 import { ScreenTimeInfo, UsedInfo, UserInfo } from "../models"
-import { getApi } from "../utilities"
+import { getApi, responseType } from "../utilities"
 
 @Injectable()
 export class GetService {
@@ -23,6 +23,10 @@ export class GetService {
 
     usedsByUser(userId: string) {
         return firstValueFrom(this.http.get<UsedInfo[]>(getApi("used", `user/${userId}`)).pipe(takeUntil(this.unsubscribe)))
+    }
+
+    usedsForTodayForMinuteByUser(userId: string) {
+        return firstValueFrom(this.http.get<string>(getApi("used", `today/minute/user/${userId}`), { responseType: responseType.text }).pipe(takeUntil(this.unsubscribe)))
     }
 
     user(id: string) {

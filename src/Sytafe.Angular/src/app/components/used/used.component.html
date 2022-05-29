@@ -1,7 +1,7 @@
 <p-blockUI [blocked]="processing">
     <p-progressSpinner></p-progressSpinner>
 </p-blockUI>
-<p-card styleClass="animate__animated animate__fadeIn" header="Used">
+<p-card styleClass="animate__animated animate__fadeIn" header="Used {{minute}} minute">
     <p-table responsiveLayout="scroll" [rowHover]="true" [value]="useds">
         <ng-template pTemplate="header">
             <tr>

@@ -30,3 +30,7 @@ export let log = (value) => {
         console.log(value)
     }
 }
+
+export let responseType = {
+    text: "text" as any
+}

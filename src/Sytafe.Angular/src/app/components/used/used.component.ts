@@ -13,23 +13,32 @@ export class UsedComponent extends AbstractComponent implements OnInit {
     @Input()
     userId = ""
 
+    minute = "0"
     useds: UsedInfo[] = []
 
     constructor(service: AppService) {
         super(service)
     }
 
+    async initMinutes() {
+        try {
+            this.minute = await this.service.get.usedsForTodayForMinuteByUser(this.userId)
+        } catch (err) {
+            this.error(err)
+        }
+    }
+
     async initUseds() {
         try {
-            this.setProcessing(true)
             this.useds = await this.service.get.usedsByUser(this.userId)
-            this.setProcessing(false)
         } catch (err) {
             this.error(err)
         }
     }
 
     async ngOnInit() {
+        this.setProcessing(true)
         await this.initUseds()
+        this.setProcessing(false)
     }
 }

@@ -39,6 +39,29 @@ public class UsedController : ControllerBase
         }
     }
 
+    [HttpGet("Today/Minute/User/{userId}")]
+    public async Task<ActionResult<string>> GetForTodayForMinuteByUser(string userId)
+    {
+        try
+        {
+            var useds = await _context.Useds.Where(x => x.From.Date == DateTime.Now.Date && x.UserId == userId).Select(x => x.ToInfo()).ToListAsync();
+            var minutes = useds.Sum(x =>
+            {
+                var to = x.To;
+                if (to == DateTime.MinValue)
+                {
+                    to = DateTime.Now;
+                }
+                return (to - x.From).TotalMinutes;
+            });
+            return minutes.ToString("N2");
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.ToInfo());
+        }
+    }
+
     [HttpGet("User/{userId}")]
     public async Task<ActionResult<List<UsedInfo>>> GetByUser(string userId)
     {
