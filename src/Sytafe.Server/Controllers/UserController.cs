@@ -103,7 +103,7 @@ public class UserController : ControllerBase
             var audience = jwt.Audience;
             var claims = new List<Claim>
             {
-                new Claim("jti", user.Id),
+                new Claim("jti", user.ToJson()),
             };
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwt.Key));
             var issuer = jwt.Issuer;

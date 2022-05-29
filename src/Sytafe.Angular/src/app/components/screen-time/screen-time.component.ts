@@ -24,16 +24,6 @@ export class ScreenTimeComponent extends AbstractComponent implements OnInit {
         super(service)
     }
 
-    delete(value: ScreenTimeInfo) {
-        try {
-            if (!confirm("Are you sure?")) {
-                return
-            }
-        } catch (err) {
-            this.error(err)
-        }
-    }
-
     edit(value: ScreenTimeInfo) {
         try {
             let { ...screenTime } = value

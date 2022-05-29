@@ -39,6 +39,20 @@ public class UsedController : ControllerBase
         }
     }
 
+    [HttpGet("User/{userId}")]
+    public async Task<ActionResult<List<UsedInfo>>> GetByUser(string userId)
+    {
+        try
+        {
+            var useds = await _context.Useds.Where(x => x.UserId == userId).Select(x => x.ToInfo()).ToListAsync();
+            return useds;
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.ToInfo());
+        }
+    }
+
     [HttpPost("Today")]
     public async Task<ActionResult<UsedInfo>> PostForToday([FromBody] UsedInfo value)
     {

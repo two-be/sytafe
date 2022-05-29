@@ -1,18 +1,24 @@
 #nullable disable
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Sytafe.Library.Extensions;
 
 namespace Sytafe.Library.Models;
 
 public class UsedInfo : Abstract
 {
-    public DateTime From { get; set; }
     public string DayOfWeek { get; set; } = string.Empty;
+    public DateTime From { get; set; }
     public DateTime To { get; set; }
     public string UserId { get; set; } = string.Empty;
 
     [ForeignKey(nameof(UserId))]
     public UserInfo User { get; set; }
+
+    [NotMapped]
+    public string DisplayFrom => From.ToDateTimeString();
+    [NotMapped]
+    public string DisplayTo => To.ToDateTimeString();
 
     public UsedInfo ToInfo()
     {

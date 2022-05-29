@@ -19,7 +19,7 @@
         </form>
     </p-card>
 </div>
-<p-menubar class="animate__animated animate__fadeIn" [model]="items" *ngIf="isSignedIn()">
+<p-menubar styleClass="animate__animated animate__fadeIn fixed w-full" [model]="items" *ngIf="isSignedIn()" style="z-index: 1;">
     <ng-template pTemplate="start">
         <img src="https://image.twodo.app/icons/3158969.png" height="40" class="mr-2">
     </ng-template>
