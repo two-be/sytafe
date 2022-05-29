@@ -17,7 +17,7 @@ public class ScreenTimeInfo : Abstract
     public UserInfo User { get; set; }
 
     [NotMapped]
-    public string DisplayAvailableTimes => Anytime ? "Anytime" : $"{AvailableFrom.ToString("hh\\:mm\\:ss")} to {AvailableTo.ToString("hh\\:mm\\:ss")}";
+    public string DisplayAvailableTimes => Anytime ? "Anytime" : $"{AvailableFrom.ToString("hh\\:mm")} to {AvailableTo.ToString("hh\\:mm")}";
     [NotMapped]
     public string DisplayMinuteLimit => MinuteLimit == 720 ? string.Empty : $"{MinuteLimit} min";
 

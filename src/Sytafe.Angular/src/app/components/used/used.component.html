@@ -8,6 +8,7 @@
                 <th>Day of Week</th>
                 <th>From</th>
                 <th>To</th>
+                <th>Minute</th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-data>
@@ -15,6 +16,7 @@
                 <td>{{data.dayOfWeek}}</td>
                 <td>{{data.displayFrom}}</td>
                 <td>{{data.displayTo}}</td>
+                <td>{{data.totalMinutes}}</td>
             </tr>
         </ng-template>
     </p-table>

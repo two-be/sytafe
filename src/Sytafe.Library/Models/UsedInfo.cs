@@ -19,6 +19,19 @@ public class UsedInfo : Abstract
     public string DisplayFrom => From.ToDateTimeString();
     [NotMapped]
     public string DisplayTo => To.ToDateTimeString();
+    [NotMapped]
+    public string TotalMinutes
+    {
+        get
+        {
+            var to = To;
+            if (to == DateTime.MinValue)
+            {
+                to = DateTime.Now;
+            }
+            return (To - From).TotalMinutes.ToString("N0");
+        }
+    }
 
     public UsedInfo ToInfo()
     {

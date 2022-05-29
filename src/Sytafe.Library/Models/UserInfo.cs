@@ -21,17 +21,22 @@ public class UserInfo : Abstract
     {
         get
         {
-            if (TodayScreenTime is not null && TodayUseds.Any())
+            if (TodayScreenTime is not null)
             {
                 var minuteLeft = TodayScreenTime.MinuteLimit;
                 var usedMinute = TodayUseds.Sum(x => (x.To - x.From).TotalMinutes.ToInt32());
-                if (usedMinute > 0)
+                minuteLeft = minuteLeft - usedMinute;
+                if (!TodayScreenTime.Anytime && minuteLeft > 0)
                 {
-                    minuteLeft = minuteLeft - usedMinute;
+                    var availableLeft = (TodayScreenTime.AvailableTo - DateTime.Now.TimeOfDay).TotalMinutes.ToInt32();
+                    if (minuteLeft > availableLeft)
+                    {
+                        minuteLeft = availableLeft + 1;
+                    }
                 }
                 return minuteLeft;
             }
-            return TodayScreenTime?.MinuteLimit ?? 2;
+            return 2;
         }
     }
     [NotMapped]
