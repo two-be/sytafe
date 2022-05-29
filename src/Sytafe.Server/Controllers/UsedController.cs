@@ -54,7 +54,7 @@ public class UsedController : ControllerBase
                 }
                 return (to - x.From).TotalMinutes;
             });
-            return minutes.ToString("N2");
+            return minutes.ToString("N0");
         }
         catch (Exception ex)
         {

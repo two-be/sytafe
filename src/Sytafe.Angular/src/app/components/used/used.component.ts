@@ -39,6 +39,7 @@ export class UsedComponent extends AbstractComponent implements OnInit {
     async ngOnInit() {
         this.setProcessing(true)
         await this.initUseds()
+        await this.initMinutes()
         this.setProcessing(false)
     }
 }
