@@ -40,9 +40,9 @@ public class UserInfo : Abstract
         }
     }
     [NotMapped]
-    public ScreenTimeInfo TodayScreenTime => ScreenTimes.FirstOrDefault(x => x.DayOfWeek == DateTimeOffset.Now.DayOfWeek.ToString());
+    public ScreenTimeInfo TodayScreenTime => ScreenTimes.FirstOrDefault(x => x.DayOfWeek == DateTime.Now.DayOfWeek.ToString());
     [NotMapped]
-    public List<UsedInfo> TodayUseds => Useds.Where(x => x.From.Date == DateTimeOffset.Now.Date).ToList();
+    public List<UsedInfo> TodayUseds => Useds.Where(x => x.From.Date == DateTime.Now.Date).ToList();
     [NotMapped]
     public string Token { get; set; } = string.Empty;
 
