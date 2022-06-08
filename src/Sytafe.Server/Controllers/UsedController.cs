@@ -67,7 +67,7 @@ public class UsedController : ControllerBase
     {
         try
         {
-            var useds = await _context.Useds.Where(x => x.UserId == userId).Select(x => x.ToInfo()).ToListAsync();
+            var useds = await _context.Useds.Where(x => x.UserId == userId).OrderByDescending(x => x.From).Select(x => x.ToInfo()).ToListAsync();
             return useds;
         }
         catch (Exception ex)

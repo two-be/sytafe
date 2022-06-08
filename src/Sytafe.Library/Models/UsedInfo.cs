@@ -29,7 +29,8 @@ public class UsedInfo : Abstract
             {
                 to = DateTime.Now;
             }
-            return (To - From).TotalMinutes.ToString("N0");
+            var totalMinutes = (To - From).TotalMinutes;
+            return totalMinutes < 0 ? string.Empty : totalMinutes.ToString("N0");
         }
     }
 
