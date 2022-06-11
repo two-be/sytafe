@@ -109,6 +109,12 @@ namespace Sytafe
             }
         }
 
+        private void signInToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _minuteLeft = 2;
+            SignIn();
+        }
+
         private void timer_Tick(object sender, EventArgs e)
         {
             if (_user.IsAdministrator)

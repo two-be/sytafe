@@ -32,6 +32,10 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AppForm));
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.secondTimer = new System.Windows.Forms.Timer(this.components);
+            this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
+            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.signInToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // timer
@@ -46,6 +50,27 @@
             this.secondTimer.Interval = 1000;
             this.secondTimer.Tick += new System.EventHandler(this.secondTimer_Tick);
             // 
+            // notifyIcon
+            // 
+            this.notifyIcon.ContextMenuStrip = this.contextMenuStrip;
+            this.notifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon.Icon")));
+            this.notifyIcon.Text = "Sytafe";
+            this.notifyIcon.Visible = true;
+            // 
+            // contextMenuStrip
+            // 
+            this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.signInToolStripMenuItem});
+            this.contextMenuStrip.Name = "contextMenuStrip";
+            this.contextMenuStrip.Size = new System.Drawing.Size(111, 26);
+            // 
+            // signInToolStripMenuItem
+            // 
+            this.signInToolStripMenuItem.Name = "signInToolStripMenuItem";
+            this.signInToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
+            this.signInToolStripMenuItem.Text = "Sign &in";
+            this.signInToolStripMenuItem.Click += new System.EventHandler(this.signInToolStripMenuItem_Click);
+            // 
             // AppForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -57,6 +82,7 @@
             this.Text = "Sytafe";
             this.WindowState = System.Windows.Forms.FormWindowState.Minimized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AppForm_FormClosing);
+            this.contextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -64,5 +90,8 @@
         #endregion
         private System.Windows.Forms.Timer timer;
         private System.Windows.Forms.Timer secondTimer;
+        private NotifyIcon notifyIcon;
+        private ContextMenuStrip contextMenuStrip;
+        private ToolStripMenuItem signInToolStripMenuItem;
     }
 }
