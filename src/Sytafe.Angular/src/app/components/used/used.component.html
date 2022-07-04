@@ -2,7 +2,7 @@
     <p-progressSpinner></p-progressSpinner>
 </p-blockUI>
 <p-card styleClass="animate__animated animate__fadeIn" header="Used {{minute}} minute">
-    <p-table responsiveLayout="scroll" [rowHover]="true" [value]="useds">
+    <p-table [paginator]="true" responsiveLayout="scroll" [rowHover]="true" [rows]="10" [value]="useds">
         <ng-template pTemplate="header">
             <tr>
                 <th>Day of Week</th>

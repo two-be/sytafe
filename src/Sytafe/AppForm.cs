@@ -44,6 +44,7 @@ namespace Sytafe
         {
             _connection = new HubConnectionBuilder().WithUrl($"{_settings.ServerAddress}/Hub").Build();
             _connection.StartAsync().GetAwaiter().GetResult();
+            _connection.Closed += _connection_Closed;
         }
 
         private void SetUsed()
@@ -92,6 +93,25 @@ namespace Sytafe
             catch (Exception ex)
             {
                 this.Error(ex);
+            }
+        }
+
+        private async Task _connection_Closed(Exception? arg)
+        {
+            var now = DateTime.Now;
+            var notNow = now.AddMinutes(1);
+            while (now <= notNow)
+            {
+                if (_connection.State == HubConnectionState.Disconnected)
+                {
+                    Connect();
+                }
+                else
+                {
+                    SetUsed();
+                    return;
+                }
+                await Task.Delay(2000);
             }
         }
 
