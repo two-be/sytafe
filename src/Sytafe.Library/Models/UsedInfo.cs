@@ -20,7 +20,7 @@ public class UsedInfo : Abstract
     [NotMapped]
     public string DisplayTo => To.ToDateTimeString();
     [NotMapped]
-    public string TotalMinutes
+    public int TotalMinutes
     {
         get
         {
@@ -30,9 +30,11 @@ public class UsedInfo : Abstract
                 to = DateTime.Now;
             }
             var totalMinutes = (To - From).TotalMinutes;
-            return totalMinutes < 0 ? string.Empty : totalMinutes.ToString("N0");
+            return totalMinutes.ToInt32();
         }
     }
+    [NotMapped]
+    public string TotalMinutesString => TotalMinutes.ToString("N0");
 
     public UsedInfo ToInfo()
     {

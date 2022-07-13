@@ -149,7 +149,15 @@ namespace Sytafe
             }
             if (_minuteLeft <= 0)
             {
-                LockWorkStation();
+                if (timer.Interval <= 10000)
+                {
+                    Process.Start(@"C:\Windows\System32\shutdown.exe -f -s -t 2");
+                }
+                else
+                {
+                    timer.Interval = timer.Interval - 10000;
+                    LockWorkStation();
+                }
             }
         }
     }

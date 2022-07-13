@@ -24,7 +24,7 @@ public class UserInfo : Abstract
             if (TodayScreenTime is not null)
             {
                 var minuteLeft = TodayScreenTime.MinuteLimit;
-                var usedMinute = TodayUseds.Sum(x => (x.To - x.From).TotalMinutes.ToInt32());
+                var usedMinute = TodayUseds.Sum(x => x.TotalMinutes);
                 minuteLeft = minuteLeft - usedMinute;
                 if (!TodayScreenTime.Anytime && minuteLeft > 0)
                 {
