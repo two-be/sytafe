@@ -151,7 +151,7 @@ namespace Sytafe
             {
                 if (timer.Interval <= 10000)
                 {
-                    Process.Start(@"C:\Windows\System32\shutdown.exe -f -s -t 2");
+                    Process.Start("shutdown", "-f -s -t 2");
                 }
                 else
                 {
