@@ -29,7 +29,7 @@ public class UsedInfo : Abstract
             {
                 to = DateTime.Now;
             }
-            var totalMinutes = (To - From).TotalMinutes;
+            var totalMinutes = (to - From).TotalMinutes;
             return totalMinutes.ToInt32();
         }
     }

@@ -47,6 +47,11 @@ namespace Sytafe
             _connection.Closed += _connection_Closed;
         }
 
+        private void SetMinuteLeftLabel(int miniuteLeft)
+        {
+            notifyIcon.Text = $"Sytafe ({miniuteLeft} min left)";
+        }
+
         private void SetUsed()
         {
             try
@@ -72,6 +77,7 @@ namespace Sytafe
             {
                 _user = signInForm.User;
                 _minuteLeft = _user.MinuteLeft;
+                SetMinuteLeftLabel(_minuteLeft);
                 return true;
             }
             else
@@ -143,6 +149,7 @@ namespace Sytafe
                 return;
             }
             _minuteLeft--;
+            SetMinuteLeftLabel(_minuteLeft);
             if (_minuteLeft == 15)
             {
                 this.Warning("Less than 15 minutes left.");
