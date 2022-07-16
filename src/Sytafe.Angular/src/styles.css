@@ -69,6 +69,14 @@ html {
     border-radius: 0;
 }
 
+.p-paginator .p-paginator-first, .p-paginator .p-paginator-prev, .p-paginator .p-paginator-next, .p-paginator .p-paginator-last {
+    border-radius: 0;
+}
+
+.p-paginator .p-paginator-pages .p-paginator-page {
+    border-radius: 0;
+}
+
 @media (min-width: 576px) {
     .container {
         max-width: 540px;

@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.SignalR.Client;
+using Serilog;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using Sytafe.Extensions;
@@ -20,8 +21,13 @@ namespace Sytafe
         private AppSettings _settings = new AppSettings();
         private UserInfo _user = new UserInfo();
 
+
         public AppForm(AppSettings settings)
         {
+            Log.Logger = new LoggerConfiguration().WriteTo.File($"./log/{DateTime.Now:yyyy-MM-dd}.txt", flushToDiskInterval: TimeSpan.FromSeconds(1)).CreateLogger();
+
+            Log.Information("InitializeComponent");
+
             InitializeComponent();
 
             _service = new AppService(settings.ServerAddress);
@@ -42,20 +48,26 @@ namespace Sytafe
 
         private void Connect()
         {
+            Log.Information("Connect");
+
             _connection = new HubConnectionBuilder().WithUrl($"{_settings.ServerAddress}/Hub").Build();
             _connection.StartAsync().GetAwaiter().GetResult();
             _connection.Closed += _connection_Closed;
         }
 
-        private void SetMinuteLeftLabel(int miniuteLeft)
+        private void SetMinuteLeftLabel()
         {
-            notifyIcon.Text = $"Sytafe ({miniuteLeft} min left)";
+            Log.Debug("{0} min left", _minuteLeft);
+
+            notifyIcon.Text = $"Sytafe ({_minuteLeft} min left)";
         }
 
         private void SetUsed()
         {
             try
             {
+                Log.Information("SetUsed");
+
                 var used = _service.GetUsedTodayUsing(_user.Id);
                 if (used is null)
                 {
@@ -71,13 +83,15 @@ namespace Sytafe
 
         private bool SignIn()
         {
+            Log.Information("SignIn");
+
             var signInForm = new SignInForm(_service);
             var rs = signInForm.ShowDialog();
             if (rs == DialogResult.OK)
             {
                 _user = signInForm.User;
                 _minuteLeft = _user.MinuteLeft;
-                SetMinuteLeftLabel(_minuteLeft);
+                SetMinuteLeftLabel();
                 return true;
             }
             else
@@ -137,7 +151,10 @@ namespace Sytafe
 
         private void signInToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _minuteLeft = 2;
+            if (_minuteLeft > 2)
+            {
+                _minuteLeft = 2;
+            }
             SignIn();
         }
 
@@ -149,7 +166,7 @@ namespace Sytafe
                 return;
             }
             _minuteLeft--;
-            SetMinuteLeftLabel(_minuteLeft);
+            SetMinuteLeftLabel();
             if (_minuteLeft == 15)
             {
                 this.Warning("Less than 15 minutes left.");

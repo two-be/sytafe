@@ -62,6 +62,16 @@ public class UserInfo : Abstract
         return this;
     }
 
+    public UserInfo ToJti()
+    {
+        return new UserInfo
+        {
+            Id = Id,
+            Type = Type,
+            Username = Username,
+        };
+    }
+
     public string Validate()
     {
         if (string.IsNullOrEmpty(Username))

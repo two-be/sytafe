@@ -1,4 +1,4 @@
 <div class="animate__animated animate__fadeIn container">
-    <p-card header="Home">
-    </p-card>
+    <p-card styleClass="mb-3 no-content" [header]="userInfo.username" [subheader]="userInfo.type"></p-card>
+    <screen-time [userId]="userInfo.id"></screen-time>
 </div>

@@ -21,7 +21,7 @@
 </div>
 <p-menubar styleClass="animate__animated animate__fadeIn fixed w-full" [model]="items" *ngIf="isSignedIn()" style="z-index: 1;">
     <ng-template pTemplate="start">
-        <img src="https://image.twodo.app/icons/3158969.png" height="40" class="mr-2">
+        <img class="cursor-pointer mr-2" height="40" routerLink="/home" src="https://image.twodo.app/icons/3158969.png">
     </ng-template>
     <ng-template pTemplate="end">
         <button pButton class="p-button-plain p-button-text" (click)="signOut()" icon="pi pi-power-off" label="Sign out"></button>

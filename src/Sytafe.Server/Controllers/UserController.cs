@@ -103,7 +103,7 @@ public class UserController : ControllerBase
             var audience = jwt.Audience;
             var claims = new List<Claim>
             {
-                new Claim("jti", user.ToJson()),
+                new Claim("jti", user.ToJti().ToJson()),
             };
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwt.Key));
             var issuer = jwt.Issuer;
@@ -150,7 +150,7 @@ public class UserController : ControllerBase
     {
         try
         {
-            var user = await _context.Users.Include(x => x.ScreenTimes).FirstOrDefaultAsync(x => x.Id == id);
+            var user = await _context.Users.Include(x => x.ScreenTimes).Include(x => x.Useds).FirstOrDefaultAsync(x => x.Id == id);
             if (user is null)
             {
                 return BadRequest(new ExceptionInfo("That user doesn't exist."));

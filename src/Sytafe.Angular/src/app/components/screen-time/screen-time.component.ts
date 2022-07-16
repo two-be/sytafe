@@ -12,6 +12,8 @@ import { AbstractComponent } from "../abstract.component"
 export class ScreenTimeComponent extends AbstractComponent implements OnInit {
 
     @Input()
+    editable = false
+    @Input()
     userId = ""
 
     dayOfWeeks: DayOfWeek[] = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
@@ -26,6 +28,10 @@ export class ScreenTimeComponent extends AbstractComponent implements OnInit {
 
     edit(value: ScreenTimeInfo) {
         try {
+            if (!this.editable) {
+                return
+            }
+
             let { ...screenTime } = value
             screenTime.availableFrom = dayjs(`0001-01-01 ${screenTime.availableFrom}`).toDate()
             screenTime.availableTo = dayjs(`0001-01-01 ${screenTime.availableTo}`).toDate()

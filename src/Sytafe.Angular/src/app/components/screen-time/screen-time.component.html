@@ -11,7 +11,7 @@
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-data>
-            <tr class="animate__animated animate__fadeIn cursor-pointer" (click)="edit(data)">
+            <tr class="animate__animated animate__fadeIn" [class.cursor-pointer]="editable" (click)="edit(data)">
                 <td>{{data.dayOfWeek}}</td>
                 <td>{{data.displayMinuteLimit}}</td>
                 <td>{{data.displayAvailableTimes}}</td>
