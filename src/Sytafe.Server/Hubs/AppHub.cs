@@ -25,7 +25,7 @@ public class AppHub : Hub
 
     public override async Task OnDisconnectedAsync(Exception? exception)
     {
-        var usedId = Context.Items["used"];
+        var usedId = Context.Items["used"] as string;
         var used = await _context.Useds.FirstOrDefaultAsync(x => x.Id == usedId);
         if (used is not null)
         {

@@ -32,7 +32,7 @@ builder.Services.AddCors(options =>
 });
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSignalR();
@@ -52,6 +52,8 @@ else
 {
     app.UseHttpsRedirection();
 }
+
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 using (var scope = app.Services.CreateScope())
 {

@@ -8,8 +8,8 @@ export type DayOfWeek = "Sunday" | "Monday" | "Tuesday" | "Wednesday" | "Thursda
 
 export class ScreenTimeInfo extends Abstract {
     anytime = false
-    availableFrom: any = new Date()
-    availableTo: any = new Date()
+    availableFrom: any = "00:00"
+    availableTo: any = "00:00"
     dayOfWeek: DayOfWeek
     minuteLimit = 0
     userId = ""

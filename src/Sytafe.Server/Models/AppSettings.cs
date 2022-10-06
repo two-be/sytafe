@@ -1,13 +1,13 @@
 namespace Sytafe.Server.Models;
 
-public class AppSettings
+public record AppSettings
 {
-    public JwtSettings Jwt { get; set; }
+    public JwtSettings Jwt { get; set; } = new JwtSettings();
 }
 
-public class JwtSettings
+public record JwtSettings
 {
-    public string Audience { get; set; }
-    public string Issuer { get; set; }
-    public string Key { get; set; }
+    public string Audience { get; set; } = string.Empty;
+    public string Issuer { get; set; } = string.Empty;
+    public string Key { get; set; } = string.Empty;
 }

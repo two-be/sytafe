@@ -1,7 +1,7 @@
 {
   "AllowedHosts": "*",
   "ConnectionStrings": {
-    "DefaultConnection": "server=server;user id=userId;password=password;initial catalog=catalog"
+    "DefaultConnection": "Host=my_host;Database=my_db;Username=my_user;Password=my_pw"
   },
   "Jwt": {
     "Audience": "audience",
