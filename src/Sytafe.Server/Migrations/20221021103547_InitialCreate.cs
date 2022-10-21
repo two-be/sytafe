@@ -51,8 +51,8 @@ namespace Sytafe.Server.Migrations
                 {
                     Id = table.Column<string>(type: "text", nullable: false),
                     DayOfWeek = table.Column<string>(type: "text", nullable: true),
-                    From = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    To = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    From = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    To = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     UserId = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>

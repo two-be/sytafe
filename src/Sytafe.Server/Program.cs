@@ -6,6 +6,8 @@ using Sytafe.Server.Data;
 using Sytafe.Server.Hubs;
 using Sytafe.Server.Models;
 
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
@@ -52,8 +54,6 @@ else
 {
     app.UseHttpsRedirection();
 }
-
-AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 using (var scope = app.Services.CreateScope())
 {

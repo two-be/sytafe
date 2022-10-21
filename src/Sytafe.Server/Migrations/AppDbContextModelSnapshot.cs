@@ -61,10 +61,10 @@ namespace Sytafe.Server.Migrations
                         .HasColumnType("text");
 
                     b.Property<DateTime>("From")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<DateTime>("To")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("UserId")
                         .HasColumnType("text");

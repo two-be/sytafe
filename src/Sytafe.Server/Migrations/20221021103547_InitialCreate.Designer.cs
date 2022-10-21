@@ -12,7 +12,7 @@ using Sytafe.Server.Data;
 namespace Sytafe.Server.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20221006031805_InitialCreate")]
+    [Migration("20221021103547_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -63,10 +63,10 @@ namespace Sytafe.Server.Migrations
                         .HasColumnType("text");
 
                     b.Property<DateTime>("From")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<DateTime>("To")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("UserId")
                         .HasColumnType("text");
